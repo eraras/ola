@@ -138,8 +138,14 @@
 }
 
 .fotos-container {
-    text-align: center;
+  display: flex;
+  flex-direction: column; /* Asegura que el texto y la imagen estén apilados verticalmente */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 70vh; /* Hace que el contenedor ocupe toda la pantalla */
+  text-align: center;
 }
+
 
 .image-slider {
     position: relative;
