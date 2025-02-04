@@ -1,0 +1,179 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffe6e9;
+    font-family: "Quicksand", sans-serif;
+  }
+  .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-100%, -50%);
+    transition: 0.2s;
+  }
+
+  .question-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transition: 0.2s;
+  }
+  .question {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .btn {
+    position: absolute;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #ff6b81;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 15px rgba(255, 107, 129, 0.5);
+  }
+  .btn:hover {
+    background-color: #ffa4b1;
+    transform: scale(1.1);
+    box-shadow: 0px 6px 20px rgba(255, 107, 129, 0.7);
+    text-shadow: 1px 1px 5px rgba(255, 182, 193, 0.8);
+  }
+  
+  .yes-btn {
+    right: 54%;
+  }
+  .no-btn {
+    left: 54%;
+  }
+  .result-container {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-100%, -50%);
+    transition: 0.2s;
+  }
+  .question-container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carta-container {
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    font-size: 1.5rem;
+}
+
+.carta-container img {
+    width: 200px;
+    margin-top: 20px;
+}
+.heart {
+    position: fixed;
+    bottom: 0;
+    font-size: 2rem;
+    color: red;
+    animation: subir 5s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+.heart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Reduce el espacio superior */
+    height: auto; /* Elimina la altura fija */
+}
+
+.heart-clickable {
+    font-size: 6rem; /* Corazón grande */
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: #ff4d6d; /* Color inicial */
+}
+
+.heart-clickable:hover {
+    transform: scale(1.2); /* Efecto al pasar el mouse */
+    color: #ff1a4c;
+}
+
+.heart-clickable.clicked {
+    transform: scale(1.5); /* Hace que crezca al hacer clic */
+    transition: transform 0.5s ease;
+}
+
+.fotos-container {
+    text-align: center;
+}
+
+.image-slider {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#slider-image {
+    width: 80%; /* Tamaño de la imagen */
+    height: auto;
+    border-radius: 10px;
+}
+
+.arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 50%;
+}
+
+.arrow-btn:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.left {
+    left: 10px;
+}
+
+.right {
+    right: 10px;
+}
