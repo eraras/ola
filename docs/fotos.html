@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotos de amor</title>
+    <link rel="stylesheet" href="valentine.css">
+</head>
+<body>
+    <div class="fotos-container">
+        <h1>¡Más momentos juntos mi amor! ❤️</h1>
+
+        <!-- Slider de imágenes -->
+        <div class="image-slider">
+            <button class="arrow-btn left" onclick="changeImage(-1)">＜</button>
+            <!-- Aquí usamos la imagen local (asegúrate de que el nombre sea correcto) -->
+            <img id="slider-image" src="https://github.com/eraras/miwifey/blob/main/images.jpeg?raw=true" alt="Imagen del amor">
+            <button class="arrow-btn right" onclick="changeImage(1)">＞</button>
+        </div>
+    </div>
+
+    <script>
+        let images = [
+            "https://github.com/eraras/miwifey/blob/main/images.jpeg?raw=true",
+            "https://github.com/eraras/miwifey/blob/main/images%20(1).jpeg?raw=true"
+        ];
+        let currentIndex = 0;
+
+        function changeImage(direction) {
+            currentIndex += direction;
+
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+
+            document.getElementById("slider-image").src = images[currentIndex];
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Sandrita ❤️</title>
+    <link rel="stylesheet" href="valentine.css">
+</head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Sandrita ❤️</title>
+    <link rel="stylesheet" href="valentine.css">
+</head>
+<body>
+    <div class="carta-container">
+        <h1>Para mi wifey Sandra <3</h1>
+        <h4>¡Eres la persona más especial en mi vida!</h4>
+        <br>
+        <p>
+            Gracias por siempre estar a mi lado te amo tanto,
+            siempre estaré para ti en cualquier momento, así
+            que nunca dudes en petarme a mensajes si me necesitas
+            para cualquier cosa, que siempre espero a que me
+            mandes mensaje, esta cartita es cortita pero que 
+            sepas que eres la chica más linda y bonita que me
+            haya podido encontrar, gracias por siempre tratarme
+            tan bien y espero que yo tmb te esté tratando bien,
+            te deseo toda la felicidad del mundo que te lo
+            mereces y más. <33
+        </p>
+        <br>
+        <p>Por muchos más momentos juntos, mi niña linda!!! 🥺🌷</p>
+
+        <!-- Corazón grande en el centro justo debajo del texto -->
+        <div class="heart-container">
+            <span class="heart-clickable" onclick="llenarCorazon()">♡</span>
+        </div>
+
+        <img src="https://media.tenor.com/1XbnZruZTwsAAAAM/cute-love.gif" alt="Amor">
+    </div>
+
+    <script>
+        function llenarCorazon() {
+            let heart = document.querySelector(".heart-clickable");
+            heart.innerHTML = "❤️"; // Cambia el corazón vacío a lleno
+            heart.classList.add("clicked"); // Agrega animación
+            
+            setTimeout(() => {
+                window.location.href = "fotos.html"; // Redirige después de 1.5 segundos
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>
