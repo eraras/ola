@@ -181,3 +181,88 @@
 .right {
     right: 10px;
 }
+
+/* === Media Queries para Móviles === */
+
+/* Pantallas de hasta 768px de ancho (como tablets y móviles pequeños) */
+@media (max-width: 768px) {
+  body {
+      height: auto;
+      padding: 10px;
+  }
+
+  .question {
+      font-size: 2rem; /* Reducir tamaño de la fuente */
+  }
+
+  .button-container {
+      flex-direction: column; /* Botones en columna */
+      align-items: center;
+      gap: 1rem;
+      position: static; /* Cambia a posición estática */
+  }
+
+  .btn {
+      width: 80%; /* Los botones deben ser más grandes */
+      font-size: 16px;
+      padding: 15px 20px;
+  }
+
+  .result-container {
+      top: 30%;
+  }
+
+  .carta-container {
+      font-size: 1.2rem; /* Reducir tamaño de texto */
+  }
+
+  .heart-clickable {
+      font-size: 4rem; /* Corazón más pequeño en móviles */
+  }
+
+  .fotos-container {
+      height: auto; /* Permitir que las fotos ocupen el tamaño del contenido */
+  }
+
+  #slider-image {
+      width: 90%; /* Imágenes más pequeñas */
+  }
+
+  .image-slider {
+      margin-top: 10px; /* Menos margen superior */
+  }
+
+  .arrow-btn {
+      font-size: 1.5rem; /* Flechas más pequeñas */
+      padding: 8px;
+  }
+}
+
+/* Para pantallas muy pequeñas (móviles más pequeños) */
+@media (max-width: 480px) {
+  .question {
+      font-size: 1.5rem; /* Reducir más el tamaño del texto */
+  }
+
+  .btn {
+      width: 90%; /* Botones ocupando más espacio */
+      font-size: 14px;
+      padding: 12px 18px;
+  }
+
+  .heart-clickable {
+      font-size: 3rem; /* Corazón aún más pequeño */
+  }
+
+  .fotos-container {
+      padding: 10px;
+  }
+
+  .image-slider {
+      margin-top: 5px;
+  }
+
+  #slider-image {
+      width: 100%; /* Las imágenes deben ocupar el ancho completo */
+  }
+}
