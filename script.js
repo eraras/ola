@@ -1,80 +1,178 @@
-// script.js
+const musicContainer = document.getElementById('music-container');
+const playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
 
-// Function to handle button click events
-function selectOption(option) {
-    // Check which option was clicked
-    if (option === 'yes') {
-        // Flash rainbow colors
-        flashRainbowColors(function() {
-            document.getElementById('question').style.display = 'none'; // Hide the question
-            displayCatHeart(); // Display the cat-heart.gif
-        });
-    } else if (option === 'no') {
-        // Change text on the "No" button to "You sure?"
-        document.getElementById('no-button').innerText = 'You sure?'; 
-        // Increase font size of "Yes" button
-        var yesButton = document.getElementById('yes-button');
-        var currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
-        var newSize = parseFloat(currentFontSize) * 2; // Increase font size by  * 2px
-        yesButton.style.fontSize = newSize + 'px';
-    } else {
-        // If neither "Yes" nor "No" was clicked, show an alert message
-        alert('Invalid option!');
-    }
+const audio = document.getElementById('audio');
+const progress = document.getElementById('progress');
+const progressContainer = document.getElementById('progress-container');
+const title = document.getElementById('title');
+const cover = document.getElementById('cover');
+const currTime = document.querySelector('#currTime');
+const durTime = document.querySelector('#durTime');
+
+// Song titles
+const songs = ['if its not you', 'blue', 'love'];
+
+// Keep track of song
+let songIndex = 2;
+
+// Initially load song details into DOM
+loadSong(songs[songIndex]);
+
+// Update song details
+function loadSong(song) {
+  title.innerText = song;
+  audio.src = `music/${song}.mp3`;
+  cover.src = `images/${song}.jpg`;
 }
 
-// Function to flash rainbow colors and then execute a callback function
-function flashRainbowColors(callback) {
-    var colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
-    var i = 0;
-    var interval = setInterval(function() {
-        document.body.style.backgroundColor = colors[i];
-        i = (i + 1) % colors.length;
-    }, 200); // Change color every 200 milliseconds
-    setTimeout(function() {
-        clearInterval(interval);
-        document.body.style.backgroundColor = ''; // Reset background color
-        if (callback) {
-            callback();
-        }
-    }, 2000); // Flash colors for 2 seconds
+// Play song
+function playSong() {
+  musicContainer.classList.add('play');
+  playBtn.querySelector('i.fas').classList.remove('fa-play');
+  playBtn.querySelector('i.fas').classList.add('fa-pause');
+
+  audio.play();
 }
 
-// Function to display the cat.gif initially
-function displayCat() {
-    // Get the container where the image will be displayed
-    var imageContainer = document.getElementById('image-container');
-    // Create a new Image element for the cat
-    var catImage = new Image();
-    // Set the source (file path) for the cat image
-    catImage.src = 'cat.gif'; // Assuming the cat image is named "cat.gif"
-    // Set alternative text for the image (for accessibility)
-    catImage.alt = 'Cat';
-    // When the cat image is fully loaded, add it to the image container
-    catImage.onload = function() {
-        imageContainer.appendChild(catImage);
-    };
+// Pause song
+function pauseSong() {
+  musicContainer.classList.remove('play');
+  playBtn.querySelector('i.fas').classList.add('fa-play');
+  playBtn.querySelector('i.fas').classList.remove('fa-pause');
+
+  audio.pause();
 }
 
-// Function to display the cat-heart.gif
-function displayCatHeart() {
-    // Clear existing content in the image container
-    document.getElementById('image-container').innerHTML = '';
-    // Get the container where the image will be displayed
-    var imageContainer = document.getElementById('image-container');
-    // Create a new Image element for the cat-heart
-    var catHeartImage = new Image();
-    // Set the source (file path) for the cat-heart image
-    catHeartImage.src = 'cat-heart.gif'; // Assuming the cat-heart image is named "cat-heart.gif"
-    // Set alternative text for the image (for accessibility)
-    catHeartImage.alt = 'Cat Heart';
-    // When the cat-heart image is fully loaded, add it to the image container
-    catHeartImage.onload = function() {
-        imageContainer.appendChild(catHeartImage);
-        // Hide the options container
-        document.getElementById('options').style.display = 'none';
-    };
+// Previous song
+function prevSong() {
+  songIndex--;
+
+  if (songIndex < 0) {
+    songIndex = songs.length - 1;
+  }
+
+  loadSong(songs[songIndex]);
+
+  playSong();
 }
 
-// Display the cat.gif initially
-displayCat();
+// Next song
+function nextSong() {
+  songIndex++;
+
+  if (songIndex > songs.length - 1) {
+    songIndex = 0;
+  }
+
+  loadSong(songs[songIndex]);
+
+  playSong();
+}
+
+// Update progress bar
+function updateProgress(e) {
+  const { duration, currentTime } = e.srcElement;
+  const progressPercent = (currentTime / duration) * 100;
+  progress.style.width = `${progressPercent}%`;
+}
+
+// Set progress bar
+function setProgress(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+
+  audio.currentTime = (clickX / width) * duration;
+}
+
+//get duration & currentTime for Time of song
+function DurTime (e) {
+	const {duration,currentTime} = e.srcElement;
+	var sec;
+	var sec_d;
+
+	// define minutes currentTime
+	let min = (currentTime==null)? 0:
+	 Math.floor(currentTime/60);
+	 min = min <10 ? '0'+min:min;
+
+	// define seconds currentTime
+	function get_sec (x) {
+		if(Math.floor(x) >= 60){
+			
+			for (var i = 1; i<=60; i++){
+				if(Math.floor(x)>=(60*i) && Math.floor(x)<(60*(i+1))) {
+					sec = Math.floor(x) - (60*i);
+					sec = sec <10 ? '0'+sec:sec;
+				}
+			}
+		}else{
+		 	sec = Math.floor(x);
+		 	sec = sec <10 ? '0'+sec:sec;
+		 }
+	} 
+
+	get_sec (currentTime,sec);
+
+	// change currentTime DOM
+	currTime.innerHTML = min +':'+ sec;
+
+	// define minutes duration
+	let min_d = (isNaN(duration) === true)? '0':
+		Math.floor(duration/60);
+	 min_d = min_d <10 ? '0'+min_d:min_d;
+
+
+	 function get_sec_d (x) {
+		if(Math.floor(x) >= 60){
+			
+			for (var i = 1; i<=60; i++){
+				if(Math.floor(x)>=(60*i) && Math.floor(x)<(60*(i+1))) {
+					sec_d = Math.floor(x) - (60*i);
+					sec_d = sec_d <10 ? '0'+sec_d:sec_d;
+				}
+			}
+		}else{
+		 	sec_d = (isNaN(duration) === true)? '0':
+		 	Math.floor(x);
+		 	sec_d = sec_d <10 ? '0'+sec_d:sec_d;
+		 }
+	} 
+
+	// define seconds duration
+	
+	get_sec_d (duration);
+
+	// change duration DOM
+	durTime.innerHTML = min_d +':'+ sec_d;
+		
+};
+
+// Event listeners
+playBtn.addEventListener('click', () => {
+  const isPlaying = musicContainer.classList.contains('play');
+
+  if (isPlaying) {
+    pauseSong();
+  } else {
+    playSong();
+  }
+});
+
+// Change song
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
+
+// Time/song update
+audio.addEventListener('timeupdate', updateProgress);
+
+// Click on progress bar
+progressContainer.addEventListener('click', setProgress);
+
+// Song ends
+audio.addEventListener('ended', nextSong);
+
+// Time of song
+audio.addEventListener('timeupdate',DurTime);
